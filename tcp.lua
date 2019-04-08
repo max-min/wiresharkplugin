@@ -1,28 +1,27 @@
 
 do
 
-    local ps_proto = Proto("PSTCP", "PSTCP packet protolcol")
+    local ps_proto = Proto("PSOverTCP", "PS stream Over Tcp protolcol")
 
-    local tcplen = ProtoField.uint32("PSTCP.tcplen", "tcplength", base.DEC)
-    local psheader = ProtoField.uint32("PSTCP.psheader", "ps-header", base.HEX)
-    local pscontent = ProtoField.bytes("PSTCP.pscontent", "ps-data", base.NONE)
+    local tcplen = ProtoField.uint32("PSOverTCP.tcplen", "tcpLength", base.DEC)
+    local psheader = ProtoField.uint32("PSOverTCP.psheader", "Header[ps]", base.HEX)
+    local pscontent = ProtoField.bytes("PSOverTCP.pscontent", "Content[ps]", base.NONE)
     
-    local sysheader = ProtoField.uint32("PSTCP.sysheader", "systme-header", base.HEX)
-    local syslen = ProtoField.uint32("PSTCP.syslen", "systme-lenght", base.DEC)
-    local syscontent = ProtoField.bytes("PSTCP.syscontent", "systme-data", base.NONE)
+    local sysheader = ProtoField.uint32("PSOverTCP.sysheader", "Header[system]", base.HEX)
+    local syslen = ProtoField.uint32("PSOverTCP.syslen", "Lenght[system]", base.DEC)
+    local syscontent = ProtoField.bytes("PSOverTCP.syscontent", "Content[system]", base.NONE)
 
-    local mapheader = ProtoField.uint32("PSTCP.mapheader", "sysmap-header", base.HEX)
-    local maplen = ProtoField.uint32("PSTCP.maplen", "sysmap-length", base.DEC)
-    local mapcontent = ProtoField.bytes("PSTCP.mapcontent","sysmap-content", base.NONE)
+    local mapheader = ProtoField.uint32("PSOverTCP.mapheader", "Header[systemmap]", base.HEX)
+    local maplen = ProtoField.uint32("PSOverTCP.maplen", "Length[systemmap]", base.DEC)
+    local mapcontent = ProtoField.bytes("PSOverTCP.mapcontent","Content[systemmap]", base.NONE)
 
-    local pesheader = ProtoField.uint32("PSTCP.pesheader", "pes-header", base.HEX)
-    local peslen = ProtoField.uint32("PSTCP.pesheader", "pes-lenght", base.DEC)
-    local pescontent = ProtoField.bytes("PSTCP.pescontent", "pes-content", base.NONE)
-    local pesheaderlen = ProtoField.uint32("PSTCP.pesheaderlen", "pes-headerlength", base.DEC)
+    local pesheader = ProtoField.uint32("PSOverTCP.pesheader", "Header[pes]", base.HEX)
+    local peslen = ProtoField.uint32("PSOverTCP.pesheader", "Lenght[pes]", base.DEC)
+    local pescontent = ProtoField.bytes("PSOverTCP.pescontent", "Content[pes]", base.NONE)
+    local pesheaderlen = ProtoField.uint32("PSOverTCP.pesheaderlen", "Length[pes]", base.DEC)
 
-    local payloadlen = ProtoField.uint32("PSTCP.payloadlength", "payload-lenght", base.DEC)
-    local datapayload = ProtoField.bytes("PSTCP.datapayload", "data-payload", base.NODE)
-    
+    local payloadlen = ProtoField.uint32("PSOverTCP.payloadlength", "Lenght[payload]", base.DEC)
+    local datapayload = ProtoField.bytes("PSOverTCP.datapayload", "Payload", base.NODE)
 
     ps_proto.fields = {
         tcplen,
@@ -46,7 +45,7 @@ do
     function ps_proto.dissector(tvb, pinfo, tree)
         
         pinfo.cols.protocol:set(ps_proto.name)
-        pinfo.cols.info:set("TCP Stream  by GB28181 Protocol")
+        pinfo.cols.info:set("PS Stream Over Tcp")
         
         local offset = 0
         local tvb_len = tvb:len()
