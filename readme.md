@@ -17,4 +17,4 @@
 
 ## changed 2019-4-8
 
-add the lua file and display fileds normally
+add the lua file and display fileds normally
