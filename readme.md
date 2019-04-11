@@ -5,9 +5,9 @@
 
 ## 使用方法
 
-1. 保存`ps.lua`文件，放到wireshark(`linux:`/etc/wireshark)安装目录下，然后修改wireshark安装目录下的`init.lua`文件：
+1. 保存`psOverUdp.lua`文件，放到wireshark(`linux:`/etc/wireshark)安装目录下，然后修改wireshark安装目录下的`init.lua`文件：
 2. 若有`disable_lua = true`这样的行，则注释掉, 或者修改为`disable_lua = false`
-3. 在`init.lua`文件末加入`dofile("ps.lua")`
+3. 在`init.lua`文件末加入`dofile("psOverUdp.lua")`
 4. 重新打开wirekshark,可以添加`ps`过滤协议进行过滤
 
 ## 注意
@@ -18,3 +18,7 @@
 ## changed 2019-4-8
 
 add the lua file and display fileds normally
+
+## add tcp 2019-4-9
+
+add tcp transfer way.
